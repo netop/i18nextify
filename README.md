@@ -1,3 +1,37 @@
+# Fork Updated
+
+Forked to update the waitForInitialRender method. I needed to wait for a HTTP response after showing the translated full page.
+
+- added a callback to the onInitialTranslate function.
+- moved the reveal of the options.ele when ready inside that callback.
+- moved the reveal of the options.ele in a css transition using a specific className.
+
+Instead of setting the `display: "none"` on the body element, just add a special class `.i18nextify-to-be-loaded` and the script will add another one when done loading `.i18nextify-loaded`
+
+```css
+.i18nextify-to-be-loaded {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: visibility 300ms ease-in;
+    -webkit-transition: opacity 300ms ease-in;
+    -moz-transition: visibility 300ms ease-in;
+    -moz-transition: opacity 300ms ease-in;
+     -ms-transition: visibility 300ms ease-in;
+     -ms-transition: opacity 300ms ease-in;
+      -o-transition: visibility 300ms ease-in;
+      -o-transition: opacity 300ms ease-in;
+         transition: visibility 300ms ease-in;
+         transition: opacity 300ms ease-in;
+}
+.i18nextify-loaded {
+    visibility: visible;
+    opacity: 100;
+}
+
+```
+
+
+
 # i18nextify
 
 Just drop the [script](https://github.com/i18next/i18nextify/blob/master/i18nextify.min.js) on your page and your ready to deliver your pages in any language.

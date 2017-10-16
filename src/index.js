@@ -30,7 +30,8 @@ function getDefaults() {
     namespaceFromPath: false,
     missingKeyHandler: missingHandler,
     ns: [],
-    onInitialTranslate: () => {}
+    classNameOnInitialTranslate: "i18nextify-loaded",
+    onInitialTranslate: (callback) => {callback()}
   };
 }
 
@@ -181,8 +182,9 @@ function init(options = {}) {
       });
 
       waitForInitialRender(children, 0, () => {
-        if (options.ele.style && options.ele.style.display === 'none') options.ele.style.display = 'block';
-        options.onInitialTranslate();
+        options.onInitialTranslate( function() {
+            options.ele.className += " "+options.classNameOnInitialTranslate ;
+        });
       });
     }
   }
